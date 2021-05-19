@@ -1,0 +1,60 @@
+# action.yml
+name: 'Run detekt with reviewdog'
+description: '🐶 Run detekt with reviewdog on pull requests to enforce best practices'
+
+inputs:
+  github_token:
+    description: 'GIT_HUB_TOKEN'
+    required: true
+  reviewdog_level:
+    description: 'Report level for reviewdog [info,warning,error]'
+    required: false
+    default: 'error'
+  reviewdog_filter:
+    description: 'Filter mode for reviewdog [added,diff_context,file,nofilter]'
+    required: false
+    default: 'added'
+  reviewdog_reporter:
+    description: |
+      Reporter of reviewdog command [github-pr-check,github-pr-review].
+      Default is github-pr-check.
+    required: false
+    default: 'github-pr-check'
+  detekt_config:
+    description: 'yml detekt config'
+    required: false
+    default: 'default-detekt-config.yml'
+  detekt_excludes:
+    description: 'Globing patterns describing paths to exclude from the analysis.'
+    required: false
+    default: '**/build/**,**/.idea/**'
+  fail_on_error:
+    description: |
+      Fails the current check if any error was found [true/false]
+      Default is true.
+    required: false
+    default: 'true'
+  detekt_baseline:
+    description: 'baseline yml detekt'
+    required: false
+    default: 'detekt-baseline.xml'
+  detekt_includes:
+    description: 'Globing patterns describing paths to include in the analysis.'
+    required: false
+    default: '**/*.kt'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.github_token }}
+    - ${{ inputs.reviewdog_level }}
+    - ${{ inputs.reviewdog_filter }}
+    - ${{ inputs.reviewdog_reporter }}
+    - ${{ inputs.detekt_config }}
+    - ${{ inputs.detekt_excludes }}
+    - ${{ inputs.fail_on_error }}
+    - ${{ inputs.detekt_baseline }}
+    - ${{ inputs.detekt_includes }}
+branding:
+  icon: 'check-square'
+  color: 'orange'
