@@ -4,7 +4,7 @@ description: '🐶 Run detekt with reviewdog on pull requests to enforce best pr
 
 inputs:
   github_token:
-    description: 'GIT_HUB_TOKEN'
+    description: 'GITHUB_TOKEN'
     required: true
   reviewdog_level:
     description: 'Report level for reviewdog [info,warning,error]'
