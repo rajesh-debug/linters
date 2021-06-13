@@ -16,6 +16,5 @@ RUN curl -sSLO https://repo1.maven.org/maven2/io/gitlab/arturbosch/detekt/detekt
     && mv detekt-formatting-${DETEKT_VERSION}.jar /opt/detekt-formatting.jar
 
 COPY entrypoint.sh /entrypoint.sh
-COPY udaan-detekt-config.yml /udaan-detekt-config.yml
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
